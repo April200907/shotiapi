@@ -9,9 +9,19 @@ app.use(cors());
 
 // List of TikTok video links (you can add more)
 const tiktokLinks = [
-  "https://www.tiktok.com/@user/video/7250000000000000001",
-  "https://www.tiktok.com/@user/video/7250000000000000002",
-  "https://www.tiktok.com/@user/video/7250000000000000003"
+  "https://vt.tiktok.com/ZSk8J4FBv/",
+  "https://vt.tiktok.com/ZSk8JmMGd/",
+  "https://vt.tiktok.com/ZSk8J4kMw/", 
+  "https://vt.tiktok.com/ZSk8JaXGq/", 
+  "https://vt.tiktok.com/ZSk8JCvRU/", 
+  "https://vt.tiktok.com/ZSk8JH3qP/", 
+  "https://vt.tiktok.com/ZSk8Jg1Jh/",
+  "https://vt.tiktok.com/ZSk8Jfk2k/", 
+  "https://vt.tiktok.com/ZSk8Jx8JX/", 
+  "https://vt.tiktok.com/ZSk8J4Hdp/", 
+  "https://vt.tiktok.com/ZSk8J4tKA/" 
+  
+  
 ];
 
 // API to fetch random TikTok video (resolves to direct MP4)
