@@ -1,21 +1,42 @@
-const express = require('express');
-const cors = require('cors');
-const app = express();
-app.use(cors());
+const express = require("express");
+const cors = require("cors");
+const axios = require("axios");
 
+const app = express();
 const PORT = process.env.PORT || 3000;
 
-const videos = [
-  "https://example.com/video1.mp4",
-  "https://example.com/video2.mp4",
-  "https://example.com/video3.mp4"
+app.use(cors());
+
+// List of TikTok video links (you can add more)
+const tiktokLinks = [
+  "https://www.tiktok.com/@user/video/7250000000000000001",
+  "https://www.tiktok.com/@user/video/7250000000000000002",
+  "https://www.tiktok.com/@user/video/7250000000000000003"
 ];
 
-app.get('/random', (req, res) => {
-  const randomIndex = Math.floor(Math.random() * videos.length);
-  res.json({ url: videos[randomIndex] });
+// API to fetch random TikTok video (resolves to direct MP4)
+app.get("/tikrandom", async (req, res) => {
+  try {
+    const url = tiktokLinks[Math.floor(Math.random() * tiktokLinks.length)];
+
+    const api = `https://api.tiklydown.me/api/download?url=${encodeURIComponent(url)}`;
+
+    const { data } = await axios.get(api);
+    if (!data.video || !data.video.noWatermark) {
+      return res.status(500).json({ error: "Failed to fetch video." });
+    }
+
+    return res.json({ url: data.video.noWatermark });
+  } catch (err) {
+    console.error("❌ Error:", err.message);
+    return res.status(500).json({ error: "Something went wrong." });
+  }
+});
+
+app.get("/", (req, res) => {
+  res.send("📺 Welcome to Shoti API with TikTok Support!");
 });
 
 app.listen(PORT, () => {
-  console.log(`Video API running on port ${PORT}`);
+  console.log(`🚀 Shoti API is running on port ${PORT}`);
 });
